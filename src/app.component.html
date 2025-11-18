@@ -1,0 +1,347 @@
+
+
+<main class="container mx-auto p-4 md:p-8">
+  <header class="text-center mb-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-slate-900">AI Planer Zaliha</h1>
+    <p class="mt-2 text-lg text-slate-600">Optimizirajte nabavu za vaš turistički objekt.</p>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Input Form Column -->
+    <div class="lg:col-span-1">
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+        <h2 class="text-2xl font-semibold mb-6 text-slate-800">Unesite podatke o objektu</h2>
+        <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()" class="space-y-4" novalidate>
+          
+          <div>
+            <label for="seasonLength" class="block text-sm font-medium text-slate-700">Dužina sezone (dani)</label>
+            <input id="seasonLength" type="number" formControlName="seasonLength" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+            @if (inventoryForm.get('seasonLength')?.invalid && inventoryForm.get('seasonLength')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('seasonLength')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('seasonLength')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+
+          <div>
+            <label for="avgNightsPerUnit" class="block text-sm font-medium text-slate-700">Prosječan broj noćenja po smještajnoj jedinici po sezoni</label>
+            <input id="avgNightsPerUnit" type="number" formControlName="avgNightsPerUnit" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+            @if (inventoryForm.get('avgNightsPerUnit')?.invalid && inventoryForm.get('avgNightsPerUnit')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('avgNightsPerUnit')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('avgNightsPerUnit')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+          
+          <div>
+            <label for="avgNightsPerBooking" class="block text-sm font-medium text-slate-700">Prosječan broj noćenja po rezervaciji</label>
+            <input id="avgNightsPerBooking" type="number" formControlName="avgNightsPerBooking" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+            @if (inventoryForm.get('avgNightsPerBooking')?.invalid && inventoryForm.get('avgNightsPerBooking')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('avgNightsPerBooking')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('avgNightsPerBooking')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+
+          <div>
+            <label for="totalArea" class="block text-sm font-medium text-slate-700">Ukupna veličina objekta (m²)</label>
+            <input id="totalArea" type="number" formControlName="totalArea" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+            @if (inventoryForm.get('totalArea')?.invalid && inventoryForm.get('totalArea')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('totalArea')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('totalArea')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+
+           <div>
+            <label for="units" class="block text-sm font-medium text-slate-700">Broj smještajnih jedinica</label>
+            <input id="units" type="number" formControlName="units" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+             @if (inventoryForm.get('units')?.invalid && inventoryForm.get('units')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('units')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('units')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+
+          <div>
+            <label for="avgUnitArea" class="block text-sm font-medium text-slate-700">Prosječna veličina jedinice (m²)</label>
+            <input id="avgUnitArea" type="number" formControlName="avgUnitArea" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+            @if (inventoryForm.get('avgUnitArea')?.invalid && inventoryForm.get('avgUnitArea')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('avgUnitArea')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('avgUnitArea')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+          
+          <div>
+            <label for="cleaners" class="block text-sm font-medium text-slate-700">Broj čistačica</label>
+            <input id="cleaners" type="number" formControlName="cleaners" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+            @if (inventoryForm.get('cleaners')?.invalid && inventoryForm.get('cleaners')?.touched) {
+              <div class="mt-1 text-sm text-red-600">
+                @if (inventoryForm.get('cleaners')?.hasError('required')) { <p>Ovo polje je obavezno.</p> }
+                @if (inventoryForm.get('cleaners')?.hasError('min')) { <p>Vrijednost mora biti najmanje 1.</p> }
+              </div>
+            }
+          </div>
+
+          <button type="submit" [disabled]="inventoryForm.invalid || loading()" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors">
+            @if (loading()) {
+              <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Generiram...</span>
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+              </svg>
+              <span>Generiraj Plan Nabave</span>
+            }
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Output Column -->
+    <div class="lg:col-span-2">
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 min-h-[600px] flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-semibold text-slate-800">Godišnji Plan Nabave</h2>
+          @if (plan() && plan()!.length > 0) {
+            <div class="flex items-center space-x-2">
+              <button (click)="copyPlan()" title="Kopiraj tabelu" class="flex items-center px-3 py-1.5 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all disabled:opacity-50 disabled:cursor-wait" [disabled]="copySuccess()">
+                @if (copySuccess()) {
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span>Kopirano!</span>
+                } @else {
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span>Kopiraj</span>
+                }
+              </button>
+              <button (click)="printPlan()" title="Ispiši plan" class="flex items-center p-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+              </button>
+              <button (click)="downloadPdf()" title="Preuzmi kao PDF" class="flex items-center p-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+            </div>
+          }
+        </div>
+        
+        @if (loading()) {
+          <div class="flex-grow flex items-center justify-center">
+            <div class="text-center">
+              <svg class="animate-spin mx-auto h-12 w-12 text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <p class="mt-4 text-slate-500">Analiziram podatke i generiram plan...</p>
+            </div>
+          </div>
+        } @else if (error()) {
+          <div class="flex-grow flex items-center justify-center">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center" role="alert">
+              <strong class="font-bold">Dogodila se greška!</strong>
+              <p class="block sm:inline mt-1">{{ error() }}</p>
+            </div>
+          </div>
+        } @else if (plan() && plan()!.length > 0) {
+          <div class="space-y-6">
+            <div id="plan-output" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+               @for (item of plan(); track item.category) {
+                <div class="bg-slate-50/50 rounded-xl shadow-md border border-slate-200 p-5 flex flex-col transition-shadow hover:shadow-lg print:shadow-none print:border print:block print:!p-4 print:mb-4">
+                  <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center">
+                      @switch (getIconForCategory(item.category)) {
+                        @case ('cleaning') {
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M10.868 2.884c.321.64.321 1.393 0 2.034a.98.98 0 01-1.737 0c-.321-.64-.321-1.393 0-2.034a.98.98 0 011.737 0zM12.24 5.49a.98.98 0 011.737 0c.321.64.321 1.393 0 2.034a.98.98 0 01-1.737 0c-.321-.64-.321-1.393 0-2.034zM10 2.25a.75.75 0 00-1.5 0v.048a.98.98 0 001.5 0V2.25zM10 6.375a.75.75 0 00-1.5 0v.048a.98.98 0 001.5 0v-.048zM7.76 5.49a.98.98 0 011.737 0c.321.64.321 1.393 0 2.034a.98.98 0 01-1.737 0c-.321-.64-.321-1.393 0-2.034zM10 9.25a.75.75 0 01-1.5 0v2.17a2.5 2.5 0 00-2.5 2.5v.75a.75.75 0 001.5 0v-.75a1 1 0 011-1v-2.17zM15.18 8.12a.75.75 0 00-1.06-1.06l-.048.047a.98.98 0 000 1.737l.048.047a.75.75 0 001.06-1.06zM5.88 7.06a.75.75 0 00-1.06 1.06l.047.048a.98.98 0 001.737 0l.047-.048a.75.75 0 00-1.06-1.06l-.047.047zM14.47 12.19a.75.75 0 00-1.06-1.06l-.048.047a.98.98 0 000 1.737l.048.047a.75.75 0 001.06-1.06zM6.53 11.13a.75.75 0 00-1.06 1.06l.047.048a.98.98 0 001.737 0l.047-.048a.75.75 0 00-1.06-1.06l-.047.047z" clip-rule="evenodd" />
+                          </svg>
+                        }
+                        @case ('bathroom') {
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
+                            <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.095a1.23 1.23 0 00.41-1.412A9.958 9.958 0 0010 12c-2.31 0-4.438.784-6.131 2.095z" />
+                          </svg>
+                        }
+                        @case ('kitchen') {
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
+                            <path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a.75.75 0 01.028.67l-1.13 2.636a.75.75 0 01-1.378-.59l1.13-2.637L3.48 3.09a.25.25 0 00-.25-.214H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                            <path d="M4.055 5.272l1.213 2.83a.75.75 0 001.378-.59l-1.213-2.83H14.25a.75.75 0 010 1.5H6.045l1.212 2.829a.75.75 0 001.378-.59l-1.212-2.83h7.078a.75.75 0 01.73.97l-1.5 5.25a.75.75 0 01-1.442-.41l1.5-5.25H7.118l-1.213 2.83a.75.75 0 001.378.59l1.213-2.83H15a2.25 2.25 0 012.23 2.023l-1.5 5.25A2.25 2.25 0 0113.5 15H6a.75.75 0 010-1.5h7.5a.75.75 0 00.73-.97l1.5-5.25A.75.75 0 0015 6.75H4.055z" />
+                          </svg>
+                        }
+                        @case ('linens') {
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
+                            <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM2 6.25c0-.69.56-1.25 1.25-1.25h7.5c.69 0 1.25.56 1.25 1.25v7.5c0 .69-.56 1.25-1.25 1.25h-7.5A1.25 1.25 0 012 13.75v-7.5z" />
+                            <path d="M16.75 8A2.25 2.25 0 0014.5 5.75v7.5c0 .69.56 1.25 1.25 1.25h.008c.69 0 1.25-.56 1.25-1.25v-7.5A2.25 2.25 0 0016.75 8z" />
+                          </svg>
+                        }
+                        @default {
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h13A1.5 1.5 0 0118 3.5v10A1.5 1.5 0 0116.5 15h-13A1.5 1.5 0 012 13.5v-10zm1.5.5a.5.5 0 00-.5.5v10a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-10a.5.5 0 00-.5-.5h-13z" clip-rule="evenodd" />
+                            <path d="M9.25 10.25a.75.75 0 01.75-.75h2.5a.75.75 0 010 1.5h-2.5a.75.75 0 01-.75-.75z" />
+                            <path fill-rule="evenodd" d="M3 6.5a.5.5 0 01.5-.5h13a.5.5 0 010 1h-13a.5.5 0 01-.5-.5z" clip-rule="evenodd" />
+                          </svg>
+                        }
+                      }
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 leading-tight">{{ item.category }}</h3>
+                  </div>
+                  <div class="mt-4 pt-4 border-t border-slate-200/80 space-y-3 text-sm">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">Mjesečna Potreba:</span>
+                      <span class="font-medium text-slate-800 bg-slate-200/60 px-2 py-0.5 rounded-md">{{ item.monthlyNeed }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">Godišnji Total:</span>
+                      <span class="font-medium text-slate-800 bg-slate-200/60 px-2 py-0.5 rounded-md">{{ item.annualTotal }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">Preporučena Zaliha (20%):</span>
+                      <span class="font-medium text-slate-800 bg-slate-200/60 px-2 py-0.5 rounded-md">{{ item.recommendedStock }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+            <!-- Shopping Plan Section -->
+            <div class="pt-6 border-t border-slate-200">
+              @if (!shoppingPlan() && !shoppingPlanLoading() && !shoppingPlanError()) {
+                <div class="text-center">
+                  <button (click)="generateShoppingPlan()" [disabled]="shoppingPlanLoading()" class="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                      <path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h4a1 1 0 100-2H7zm0 4a1 1 0 100 2h4a1 1 0 100-2H7z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Generiraj Plan Kupovine</span>
+                  </button>
+                </div>
+              }
+
+              @if (shoppingPlanLoading()) {
+                <div class="flex-grow flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="animate-spin mx-auto h-10 w-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="mt-4 text-slate-500">Pretražujem web za najbolje ponude...</p>
+                  </div>
+                </div>
+              } @else if (shoppingPlanError()) {
+                 <div class="flex-grow flex items-center justify-center">
+                  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center" role="alert">
+                    <strong class="font-bold">Greška kod plana kupovine!</strong>
+                    <p class="block sm:inline mt-1">{{ shoppingPlanError() }}</p>
+                  </div>
+                </div>
+              } @else if (shoppingPlan() && shoppingPlan()!.length > 0) {
+                <div>
+                   <div class="flex flex-wrap justify-between items-center mb-4 gap-4">
+                      <h3 class="text-xl font-semibold text-slate-800">Aktivni Plan Kupovine</h3>
+                      <div class="flex items-center space-x-2">
+                          <button (click)="refreshShoppingPlanPrices()" [disabled]="shoppingPlanRefreshLoading()" title="Osvježi cijene" class="flex items-center p-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                            @if(shoppingPlanRefreshLoading()) {
+                              <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                            } @else {
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 110 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                              </svg>
+                            }
+                          </button>
+                          <button (click)="downloadShoppingPlanPdf()" title="Preuzmi kao PDF" class="flex items-center p-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                          </button>
+                      </div>
+                    </div>
+                   <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                      @for (item of shoppingPlan(); track item.item; let itemIndex = $index) {
+                        @let selectedOffer = item.offers[item.selectedOfferIndex];
+                        <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-5 flex flex-col transition-shadow hover:shadow-xl">
+                          <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-slate-800 pr-4">{{ item.item }}</h4>
+                            @if (selectedOffer.estimatedSavings) {
+                              <span class="flex-shrink-0 bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">{{ selectedOffer.estimatedSavings }} Ušteda</span>
+                            }
+                          </div>
+                          <div class="flex items-baseline text-sm text-slate-500 mb-4">
+                            <span>Količina:</span>
+                            <span class="ml-1 font-medium text-slate-700">{{ item.quantity }}</span>
+                          </div>
+
+                          <!-- Offer Selector -->
+                          <div class="flex border border-slate-300 rounded-lg overflow-hidden my-2">
+                            @for (offer of item.offers; track $index; let offerIndex = $index) {
+                              <button 
+                                (click)="selectOffer(itemIndex, offerIndex)"
+                                [class]="item.selectedOfferIndex === offerIndex ? 'bg-sky-600 text-white' : 'bg-white text-slate-700 hover:bg-slate-100'"
+                                class="flex-1 p-2 text-sm text-center border-r border-slate-300 last:border-r-0 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:z-10">
+                                <span class="font-semibold block truncate">{{ offer.shop }}</span>
+                                <span class="text-xs">{{ offer.price }}</span>
+                              </button>
+                            }
+                          </div>
+
+                          <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm my-4">
+                              <div>
+                                <p class="text-slate-500">Trgovina</p>
+                                <p class="font-semibold text-slate-800 truncate">{{ selectedOffer.shop }}</p>
+                              </div>
+                               <div>
+                                <p class="text-slate-500">Ukupni Trošak</p>
+                                <p class="font-semibold text-slate-800">{{ selectedOffer.totalCost }}</p>
+                              </div>
+                          </div>
+                          
+                          @if (selectedOffer.webShopUrl) {
+                            <div class="mt-auto pt-4 border-t border-slate-200">
+                               <a [href]="selectedOffer.webShopUrl" target="_blank" rel="noopener noreferrer" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
+                                  Posjeti Web Shop
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                  </svg>
+                                </a>
+                            </div>
+                          }
+                        </div>
+                      }
+                   </div>
+                </div>
+              }
+            </div>
+          </div>
+
+        } @else {
+          <div class="flex-grow flex items-center justify-center">
+            <div class="text-center">
+               <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+              <p class="mt-4 text-slate-500">Vaš generirani plan nabave će se pojaviti ovdje.</p>
+              <p class="text-sm text-slate-400">Ispunite obrazac i kliknite 'Generiraj'.</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</main>

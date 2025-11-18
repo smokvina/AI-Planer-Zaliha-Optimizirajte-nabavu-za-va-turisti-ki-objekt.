@@ -1,0 +1,5 @@
+{
+  "name": "AI Planer Zaliha za Iznajmljivače",
+  "description": "Aplikacija koja koristi Gemini za generiranje detaljnog godišnjeg plana nabave i zaliha potrošnih sredstava za turističke iznajmljivače, pomažući u optimizaciji troškova i upravljanju zalihama.",
+  "requestFramePermissions": []
+}
